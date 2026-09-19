@@ -6,8 +6,8 @@ uniform sampler2D tex;
 vec4 default_post_processing(vec4 c);
 
 vec4 window_shader() {
-    vec2 texsize = textureSize(tex, 0);
-    vec4 color = texture2D(tex, texcoord / texsize, 0);
+    vec2 texsize = vec2(textureSize(tex, 0));
+    vec4 color = texture2D(tex, texcoord / texsize);
 
     float gray = dot(color.rgb, vec3(0.2126, 0.7152, 0.0722));
     return default_post_processing(vec4(vec3(gray), color.a));

@@ -29,10 +29,11 @@ vec4 window_shader() {
 	vec2 region_origin = vec2(regionX, regionY);
 	vec2 region_size = vec2(regionWidth, regionHeight);
 
-	// These are the requested defaults. A non-positive size selects them.
+	// The pass runs per monitor, so the default region is monitor-local:
+	// the full effective size, anchored at the top-left.
 	if (region_size.x <= 0.0 || region_size.y <= 0.0) {
-		region_origin = vec2(1200.0, 840.0);
-		region_size = vec2(1920.0, 1080.0);
+		region_origin = vec2(0.0);
+		region_size = effective_size;
 	}
 
 	vec2 region_pixel = texcoord - region_origin;
